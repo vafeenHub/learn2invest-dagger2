@@ -80,7 +80,7 @@ androidx-espresso-intent = { group = "androidx.test.espresso.intent", name = "es
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }
-kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
+kotlin-android = { id = "org.jetbrains.kotlin.android", version = "2.2.0" }
 ksp = { id = "com.google.devtools.ksp", version.ref = "ksp" }
 hilt-android = { id = "com.google.dagger.hilt.android", version.ref = "hiltAndroid" } # Hilt Android Plugin
 android-library = { id = "com.android.library", version.ref = "agp" }  # Android Library Plugin

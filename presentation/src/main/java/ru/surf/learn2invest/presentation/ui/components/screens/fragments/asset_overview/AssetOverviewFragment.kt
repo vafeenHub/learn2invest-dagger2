@@ -1,5 +1,6 @@
 package ru.surf.learn2invest.presentation.ui.components.screens.fragments.asset_overview
 
+import android.R.attr.name
 import android.content.res.Configuration
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -11,16 +12,20 @@ import kotlinx.coroutines.flow.collectLatest
 import ru.surf.learn2invest.domain.utils.launchMAIN
 import ru.surf.learn2invest.presentation.R
 import ru.surf.learn2invest.presentation.databinding.FragmentAssetOverviewBinding
+import ru.surf.learn2invest.presentation.di.DaggerPresentationComponent
 import ru.surf.learn2invest.presentation.ui.components.alert_dialogs.buy_dialog.BuyDialog
+import ru.surf.learn2invest.presentation.ui.components.alert_dialogs.buy_dialog.BuyDialogViewModel
 import ru.surf.learn2invest.presentation.ui.components.alert_dialogs.sell_dialog.SellDialog
 import ru.surf.learn2invest.presentation.ui.components.screens.fragments.common.BaseResFragment
 import ru.surf.learn2invest.presentation.utils.NoArgException
 import ru.surf.learn2invest.presentation.utils.formatAsPrice
 import ru.surf.learn2invest.presentation.utils.getWithCurrency
 import ru.surf.learn2invest.presentation.utils.viewModelCreator
+import ru.vafeen.core.di.coreComponent
 import java.text.NumberFormat
 import java.util.Locale
 import javax.inject.Inject
+import javax.inject.Provider
 
 /**
  * Фрагмент, отображающий обзор актива, включая график и финансовую информацию.
@@ -28,14 +33,23 @@ import javax.inject.Inject
  */
 internal class AssetOverviewFragment : BaseResFragment() {
     @Inject
-    lateinit var factory: AssetOverViewFragmentViewModel.Factory
+    lateinit var viewModelProvider: Provider<AssetOverViewFragmentViewModel.Factory>
 
     private val viewModel: AssetOverViewFragmentViewModel by viewModelCreator {
-        factory.createAssetOverViewFragmentViewModel(
+        viewModelProvider.get().createAssetOverViewFragmentViewModel(
             id = requireArguments().getString(ID_KEY) ?: throw NoArgException(ID_KEY),
             symbol = requireArguments().getString(SYMBOL_KEY) ?: throw NoArgException(SYMBOL_KEY),
             name = requireArguments().getString(NAME_KEY) ?: throw NoArgException(NAME_KEY),
         )
+    }
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        DaggerPresentationComponent
+            .builder()
+            .coreComponent(requireContext().coreComponent)
+            .build()
+            .inject(this)
+        super.onCreate(savedInstanceState)
     }
 
     override fun onCreateView(

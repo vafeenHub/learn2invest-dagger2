@@ -37,6 +37,7 @@ android {
 }
 
 dependencies {
+    api(project(":core"))
     implementation(project(":data"))
     implementation(project(":presentation"))
     implementation(libs.androidx.core.ktx)

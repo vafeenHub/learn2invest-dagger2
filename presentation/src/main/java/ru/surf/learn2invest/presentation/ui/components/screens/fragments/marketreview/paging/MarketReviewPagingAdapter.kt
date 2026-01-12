@@ -1,6 +1,5 @@
 package ru.surf.learn2invest.presentation.ui.components.screens.fragments.marketreview.paging
 
-import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -9,6 +8,9 @@ import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.RecyclerView
+import dagger.assisted.Assisted
+import dagger.assisted.AssistedFactory
+import dagger.assisted.AssistedInject
 import ru.surf.learn2invest.domain.domain_models.CoinReview
 import ru.surf.learn2invest.domain.services.coin_icon_loader.usecase.LoadCoinIconUseCase
 import ru.surf.learn2invest.presentation.R
@@ -17,7 +19,6 @@ import ru.surf.learn2invest.presentation.utils.getWithCurrency
 import ru.surf.learn2invest.presentation.utils.round
 import java.text.NumberFormat
 import java.util.Locale
-import javax.inject.Inject
 
 /**
  * Адаптер для отображения списка криптовалют с пагинацией.
@@ -29,9 +30,9 @@ import javax.inject.Inject
  * @param loadCoinIconUseCase UseCase для загрузки иконок криптовалют
  * @param context Контекст активности (передается через Hilt)
  */
-internal class MarketReviewPagingAdapter @Inject constructor(
+internal class MarketReviewPagingAdapter @AssistedInject constructor(
     private val loadCoinIconUseCase: LoadCoinIconUseCase,
-    private val context: Context
+    @Assisted private val context: AppCompatActivity
 ) : PagingDataAdapter<CoinReview, MarketReviewPagingAdapter.ViewHolder>(
     MarketReviewPagingCallback()
 ) {
@@ -103,5 +104,10 @@ internal class MarketReviewPagingAdapter @Inject constructor(
         val coinBottomTextInfo: TextView = itemView.findViewById(R.id.coin_symbol)
         val coinTopNumericInfo: TextView = itemView.findViewById(R.id.coin_top_numeric_info)
         val coinBottomNumericInfo: TextView = itemView.findViewById(R.id.coin_bottom_numeric_info)
+    }
+
+    @AssistedFactory
+    interface Factory {
+        fun create(@Assisted context: AppCompatActivity): MarketReviewPagingAdapter
     }
 }

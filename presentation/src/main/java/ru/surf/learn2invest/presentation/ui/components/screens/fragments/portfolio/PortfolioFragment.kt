@@ -9,13 +9,13 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.net.toUri
 import androidx.core.view.GravityCompat
 import androidx.core.view.isVisible
-import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import kotlinx.coroutines.flow.collectLatest
 import ru.surf.learn2invest.domain.utils.launchMAIN
 import ru.surf.learn2invest.presentation.R
 import ru.surf.learn2invest.presentation.databinding.FragmentPortfolioBinding
+import ru.surf.learn2invest.presentation.di.DaggerPresentationComponent
 import ru.surf.learn2invest.presentation.ui.components.alert_dialogs.refill_account_dialog.RefillAccountDialog
 import ru.surf.learn2invest.presentation.ui.components.chart.AssetBalanceHistoryFormatter
 import ru.surf.learn2invest.presentation.ui.components.chart.LineChartHelper
@@ -24,15 +24,31 @@ import ru.surf.learn2invest.presentation.ui.components.screens.fragments.common.
 import ru.surf.learn2invest.presentation.utils.DevStrLink
 import ru.surf.learn2invest.presentation.utils.getVersionName
 import ru.surf.learn2invest.presentation.utils.getWithCurrency
+import ru.surf.learn2invest.presentation.utils.viewModelCreator
+import ru.vafeen.core.di.coreComponent
 import java.util.Locale
 import javax.inject.Inject
+import javax.inject.Provider
 
 /**
  * Фрагмент портфеля в [HostActivity][ru.surf.learn2invest.presentation.ui.components.screens.host.HostActivity]
  */
 
 internal class PortfolioFragment : BaseResFragment() {
-    private val viewModel: PortfolioFragmentViewModel by viewModels()
+    @Inject
+    lateinit var viewModelProvider: Provider<PortfolioFragmentViewModel>
+    private val viewModel: PortfolioFragmentViewModel by viewModelCreator {
+        viewModelProvider.get()
+    }
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        DaggerPresentationComponent
+            .builder()
+            .coreComponent(requireContext().coreComponent)
+            .build()
+            .inject(this)
+        super.onCreate(savedInstanceState)
+    }
 
 
     @Inject

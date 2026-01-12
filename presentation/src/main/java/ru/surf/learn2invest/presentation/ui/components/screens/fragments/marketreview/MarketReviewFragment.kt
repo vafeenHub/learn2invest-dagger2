@@ -9,8 +9,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.inputmethod.InputMethodManager
+import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.isVisible
-import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.paging.LoadState
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -18,10 +18,14 @@ import kotlinx.coroutines.flow.collectLatest
 import ru.surf.learn2invest.domain.utils.launchMAIN
 import ru.surf.learn2invest.presentation.R
 import ru.surf.learn2invest.presentation.databinding.FragmentMarketReviewBinding
+import ru.surf.learn2invest.presentation.di.DaggerPresentationComponent
 import ru.surf.learn2invest.presentation.ui.components.screens.fragments.common.BaseResFragment
 import ru.surf.learn2invest.presentation.ui.components.screens.fragments.marketreview.paging.MarketReviewPagingAdapter
 import ru.surf.learn2invest.presentation.utils.textListener
+import ru.surf.learn2invest.presentation.utils.viewModelCreator
+import ru.vafeen.core.di.coreComponent
 import javax.inject.Inject
+import javax.inject.Provider
 
 /**
  * Фрагмент для отображения обзора рынка в HostActivity.
@@ -33,17 +37,32 @@ import javax.inject.Inject
  * - Поддержка темной/светлой темы
  */
 internal class MarketReviewFragment : BaseResFragment() {
+    @Inject
+    lateinit var viewModelProvider: Provider<MarketReviewFragmentViewModel>
+    override fun onCreate(savedInstanceState: Bundle?) {
+        DaggerPresentationComponent
+            .builder()
+            .coreComponent(requireContext().coreComponent)
+            .build()
+            .inject(this)
+        super.onCreate(savedInstanceState)
+    }
 
     /**
      * ViewModel для управления состоянием фрагмента
      */
-    private val viewModel: MarketReviewFragmentViewModel by viewModels()
+    private val viewModel: MarketReviewFragmentViewModel by viewModelCreator {
+        viewModelProvider.get()
+    }
 
     /**
      * Адаптер для отображения данных с пагинацией
      */
     @Inject
-    lateinit var adapter: MarketReviewPagingAdapter
+    lateinit var factory: MarketReviewPagingAdapter.Factory
+    private val adapter: MarketReviewPagingAdapter by lazy {
+        factory.create(requireActivity() as AppCompatActivity)
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater,

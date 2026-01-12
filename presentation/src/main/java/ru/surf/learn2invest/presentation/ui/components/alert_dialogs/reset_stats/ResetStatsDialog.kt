@@ -1,13 +1,18 @@
 package ru.surf.learn2invest.presentation.ui.components.alert_dialogs.reset_stats
 
+import android.os.Bundle
 import android.widget.Toast
-import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import kotlinx.coroutines.flow.collectLatest
 import ru.surf.learn2invest.domain.utils.launchMAIN
 import ru.surf.learn2invest.presentation.R
 import ru.surf.learn2invest.presentation.databinding.SimpleDialogBinding
+import ru.surf.learn2invest.presentation.di.DaggerPresentationComponent
 import ru.surf.learn2invest.presentation.ui.components.alert_dialogs.parent.CustomAlertDialog
+import ru.surf.learn2invest.presentation.utils.viewModelCreator
+import ru.vafeen.core.di.coreComponent
+import javax.inject.Inject
+import javax.inject.Provider
 
 /**
  * Диалог для сброса статистики.
@@ -69,8 +74,19 @@ internal class ResetStatsDialog : CustomAlertDialog() {
         }
     }
 
+    @Inject
+    lateinit var viewModelProvider: Provider<ResetStatsDialogViewModel>
+
     /**
      * ViewModel для работы с логикой сброса статистики.
      */
-    private val viewModel by viewModels<ResetStatsDialogViewModel>()
+    private val viewModel: ResetStatsDialogViewModel by viewModelCreator {
+        viewModelProvider.get()
+    }
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        DaggerPresentationComponent.builder().coreComponent(requireContext().coreComponent).build()
+            .inject(this)
+        super.onCreate(savedInstanceState)
+    }
 }

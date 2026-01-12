@@ -1,11 +1,16 @@
 package ru.surf.learn2invest.presentation.ui.components.screens.trading_password.remove
 
+import android.os.Bundle
 import ru.surf.learn2invest.presentation.R
+import ru.surf.learn2invest.presentation.di.DaggerPresentationComponent
 import ru.surf.learn2invest.presentation.ui.components.screens.trading_password.common.TradingPasswordActivity
 import ru.surf.learn2invest.presentation.ui.components.screens.trading_password.common.TradingPasswordActivityState
 import ru.surf.learn2invest.presentation.ui.components.screens.trading_password.common.TradingPasswordActivityViewModel
+import ru.surf.learn2invest.presentation.ui.components.screens.trading_password.create.TradingPasswordChangeActivityViewModel
 import ru.surf.learn2invest.presentation.utils.viewModelCreator
+import ru.vafeen.core.di.coreComponent
 import javax.inject.Inject
+import javax.inject.Provider
 
 /**
  * Активити для удаления торгового пароля.
@@ -15,10 +20,10 @@ import javax.inject.Inject
 
 internal class TradingPasswordRemoveActivity : TradingPasswordActivity() {
     @Inject
-    lateinit var factory: TradingPasswordRemoveActivityViewModel.Factory
+    lateinit var viewModelProvider: Provider<TradingPasswordChangeActivityViewModel.Factory>
 
     override val viewModel: TradingPasswordActivityViewModel by viewModelCreator {
-        factory.create(
+        viewModelProvider.get().create(
             TradingPasswordActivityState(
                 mainText = this.getString(R.string.remove_trpas),
                 mainButtonText = this.getString(R.string.remove),
@@ -27,5 +32,14 @@ internal class TradingPasswordRemoveActivity : TradingPasswordActivity() {
                 passwordConfirmEditText = ""
             )
         )
+    }
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        DaggerPresentationComponent
+            .builder()
+            .coreComponent(applicationContext.coreComponent)
+            .build()
+            .inject(this)
+        super.onCreate(savedInstanceState)
     }
 }

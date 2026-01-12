@@ -13,11 +13,14 @@ import kotlinx.coroutines.flow.collectLatest
 import ru.surf.learn2invest.domain.utils.launchMAIN
 import ru.surf.learn2invest.presentation.R
 import ru.surf.learn2invest.presentation.databinding.ActivityAssetReviewBinding
+import ru.surf.learn2invest.presentation.di.DaggerPresentationComponent
 import ru.surf.learn2invest.presentation.ui.components.screens.fragments.asset_overview.AssetOverviewFragment
 import ru.surf.learn2invest.presentation.ui.components.screens.fragments.subhistory.SubHistoryFragment
 import ru.surf.learn2invest.presentation.utils.NoArgException
 import ru.surf.learn2invest.presentation.utils.viewModelCreator
+import ru.vafeen.core.di.coreComponent
 import javax.inject.Inject
+import javax.inject.Provider
 
 /**
  * Экран обзора актива, позволяющий пользователю просматривать подробности актива,
@@ -25,10 +28,10 @@ import javax.inject.Inject
  */
 internal class AssetReviewActivity : AppCompatActivity() {
     @Inject
-    lateinit var factory: AssetReviewActivityViewModel.Factory
+    lateinit var viewModelProvider: Provider<AssetReviewActivityViewModel.Factory>
 
     private val viewModel: AssetReviewActivityViewModel by viewModelCreator {
-        factory.createAssetReviewActivityViewModel(
+        viewModelProvider.get().createAssetReviewActivityViewModel(
             intent.getStringExtra(ID_KEY) ?: throw NoArgException(ID_KEY),
             intent.getStringExtra(NAME_KEY) ?: throw NoArgException(NAME_KEY),
             intent.getStringExtra(SYMBOL_KEY) ?: throw NoArgException(SYMBOL_KEY)
@@ -41,6 +44,11 @@ internal class AssetReviewActivity : AppCompatActivity() {
      * и фрагменты для отображения.
      */
     override fun onCreate(savedInstanceState: Bundle?) {
+        DaggerPresentationComponent
+            .builder()
+            .coreComponent(this.coreComponent)
+            .build()
+            .inject(this)
         super.onCreate(savedInstanceState)
 
         // Установка цветов для статус бара и навигационной панели

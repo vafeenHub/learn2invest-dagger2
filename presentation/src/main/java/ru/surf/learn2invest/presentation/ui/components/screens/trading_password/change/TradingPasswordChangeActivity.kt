@@ -1,12 +1,16 @@
 package ru.surf.learn2invest.presentation.ui.components.screens.trading_password.change
 
+import android.os.Bundle
 import ru.surf.learn2invest.presentation.R
+import ru.surf.learn2invest.presentation.di.DaggerPresentationComponent
 import ru.surf.learn2invest.presentation.ui.components.screens.trading_password.common.TradingPasswordActivity
 import ru.surf.learn2invest.presentation.ui.components.screens.trading_password.common.TradingPasswordActivityState
 import ru.surf.learn2invest.presentation.ui.components.screens.trading_password.common.TradingPasswordActivityViewModel
 import ru.surf.learn2invest.presentation.ui.components.screens.trading_password.create.TradingPasswordChangeActivityViewModel
 import ru.surf.learn2invest.presentation.utils.viewModelCreator
+import ru.vafeen.core.di.coreComponent
 import javax.inject.Inject
+import javax.inject.Provider
 
 /**
  * Активити для смены торгового пароля.
@@ -15,11 +19,11 @@ import javax.inject.Inject
  */
 
 internal class TradingPasswordChangeActivity : TradingPasswordActivity() {
-    @Inject
-    lateinit var factory: TradingPasswordChangeActivityViewModel.Factory
 
+    @Inject
+    lateinit var viewModelProvider: Provider<TradingPasswordChangeActivityViewModel.Factory>
     override val viewModel: TradingPasswordActivityViewModel by viewModelCreator {
-        factory.create(
+        viewModelProvider.get().create(
             TradingPasswordActivityState(
                 mainText = this.getString(R.string.change_trpas),
                 mainButtonText = this.getString(R.string.change),
@@ -33,5 +37,14 @@ internal class TradingPasswordChangeActivity : TradingPasswordActivity() {
                 passwordConfirmEditText = ""
             )
         )
+    }
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        DaggerPresentationComponent
+            .builder()
+            .coreComponent(applicationContext.coreComponent)
+            .build()
+            .inject(this)
+        super.onCreate(savedInstanceState)
     }
 }

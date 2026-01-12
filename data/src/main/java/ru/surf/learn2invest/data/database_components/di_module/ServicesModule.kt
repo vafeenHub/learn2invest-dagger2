@@ -9,7 +9,7 @@ import ru.surf.learn2invest.data.services.settings_manager.SettingsManagerImpl
 import ru.surf.learn2invest.data.services.settings_manager.SharedPreferencesValue
 import ru.surf.learn2invest.domain.services.coin_icon_loader.CoinIconLoader
 import ru.surf.learn2invest.domain.services.settings_manager.SettingsManager
-import javax.inject.Singleton
+import ru.vafeen.core.di.CoreScope
 
 @Module
 internal class ServicesModule {
@@ -21,12 +21,12 @@ internal class ServicesModule {
 internal class SingletonServices {
 
     @Provides
-    @Singleton
+    @CoreScope
     fun provideSharedPreferences(context: Context): SharedPreferences =
         context
             .getSharedPreferences(SharedPreferencesValue.NAME, Context.MODE_PRIVATE)
 
     @Provides
-    @Singleton
+    @CoreScope
     fun provideSettingsManager(impl: SettingsManagerImpl): SettingsManager = impl
 }

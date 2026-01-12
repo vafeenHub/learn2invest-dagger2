@@ -4,7 +4,7 @@ package ru.surf.learn2invest.data.services.coin_api_service
  * Константы для репозитория сетевого взаимодействия
  */
 object RetrofitLinks {
-    const val BASE_URL = "http://192.168.1.103:8080/"
+    const val BASE_URL = "http://192.168.0.102:8080/"
     const val API_MARKET_REVIEW = "assets"
     const val API_HISTORY = "assets/{id}/history"
     const val API_COIN_REVIEW = "assets/{id}"

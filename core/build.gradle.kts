@@ -2,12 +2,13 @@ plugins {
     alias(libs.plugins.android.library)
     alias(libs.plugins.kotlin.android)
     alias(libs.plugins.ksp)
-    kotlin("plugin.serialization") version "2.1.0"
 }
 
 android {
-    namespace = "ru.surf.learn2invest.data"
-    compileSdk = 36
+    namespace = "ru.vafeen.core"
+    compileSdk {
+        version = release(36)
+    }
 
     defaultConfig {
         minSdk = 26
@@ -31,36 +32,15 @@ android {
     }
 }
 
-ksp {
-    arg("room.schemaLocation", "$projectDir/schemas")
-}
-
 dependencies {
     api(project(":domain"))
-    api(project(":core"))
-    implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)
     implementation(libs.material)
+    implementation(libs.androidx.core.ktx)
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
-// dagger2
+    // dagger2
     implementation(libs.dagger)
     ksp(libs.dagger.compiler)
-    // room
-    implementation(libs.androidx.room.runtime)
-    implementation(libs.androidx.room.ktx)
-    ksp(libs.androidx.room.compiler)
-    // retrofit
-    implementation(libs.retrofit)
-    implementation(libs.converter.gson)
-    implementation(libs.gson)
-    implementation(libs.logging.interceptor)
-    // using fingerprint
-    implementation(libs.androidx.biometric)
-    //coil
-    implementation(libs.coil.svg)
-    implementation(libs.coil)
-    //serialization
-    implementation(libs.kotlinx.serialization.json)
 }
