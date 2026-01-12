@@ -2,18 +2,30 @@ package ru.surf.learn2invest.presentation.ui.main
 
 import android.os.Bundle
 import androidx.activity.enableEdgeToEdge
-import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
-import dagger.hilt.android.AndroidEntryPoint
 import ru.surf.learn2invest.domain.utils.launchMAIN
 import ru.surf.learn2invest.presentation.databinding.ActivityMainBinding
+import ru.surf.learn2invest.presentation.di.DaggerPresentationComponent
+import ru.surf.learn2invest.presentation.utils.viewModelCreator
+import ru.vafeen.core.di.coreComponent
+import javax.inject.Inject
+import javax.inject.Provider
 
-@AndroidEntryPoint
+
 internal class MainActivity : AppCompatActivity() {
-    private val viewModel: MainActivityViewModel by viewModels()
+    @Inject
+    lateinit var viewModelProvider: Provider<MainActivityViewModel>
+    private val viewModel: MainActivityViewModel by viewModelCreator {
+        viewModelProvider.get()
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        DaggerPresentationComponent
+            .builder()
+            .coreComponent(applicationContext.coreComponent)
+            .build()
+            .inject(this)
         super.onCreate(savedInstanceState)
 
         val binding = ActivityMainBinding.inflate(layoutInflater)

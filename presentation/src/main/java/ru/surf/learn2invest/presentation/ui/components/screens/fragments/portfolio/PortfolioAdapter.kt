@@ -11,7 +11,6 @@ import androidx.recyclerview.widget.RecyclerView
 import dagger.assisted.Assisted
 import dagger.assisted.AssistedFactory
 import dagger.assisted.AssistedInject
-import dagger.hilt.android.qualifiers.ApplicationContext
 import ru.surf.learn2invest.domain.domain_models.AssetInvest
 import ru.surf.learn2invest.domain.services.coin_icon_loader.usecase.LoadCoinIconUseCase
 import ru.surf.learn2invest.presentation.R
@@ -29,7 +28,7 @@ import ru.surf.learn2invest.presentation.utils.round
  */
 internal class PortfolioAdapter @AssistedInject constructor(
     private val loadCoinIconUseCase: LoadCoinIconUseCase,
-    @ApplicationContext private val context: Context,
+    private val context: Context,
     @Assisted private val startActivity: (id: String, name: String, symbol: String) -> Unit
 ) : RecyclerView.Adapter<PortfolioAdapter.PortfolioViewHolder>() {
 

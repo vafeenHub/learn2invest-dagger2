@@ -2,7 +2,6 @@ package ru.surf.learn2invest.presentation.ui.components.screens.fragments.histor
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.map
@@ -16,7 +15,7 @@ import javax.inject.Inject
  *
  * @param getAllTransactionUseCase UseCase для получения всех транзакций.
  */
-@HiltViewModel
+
 internal class HistoryFragmentViewModel @Inject constructor(
     private val getAllTransactionUseCase: GetAllTransactionUseCase
 ) :

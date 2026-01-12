@@ -2,7 +2,6 @@ package ru.surf.learn2invest.presentation.ui.components.alert_dialogs.refill_acc
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asSharedFlow
@@ -17,7 +16,7 @@ import javax.inject.Inject
  *
  * @property settingsManager Менеджер профиля, используемый для обновления данных пользователя.
  */
-@HiltViewModel
+
 internal class RefillAccountDialogViewModel @Inject constructor(
     private val settingsManager: SettingsManager,
 ) : ViewModel() {

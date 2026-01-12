@@ -8,29 +8,35 @@ import android.view.inputmethod.EditorInfo
 import android.view.inputmethod.InputMethodManager
 import androidx.activity.SystemBarStyle
 import androidx.activity.enableEdgeToEdge
-import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.WindowCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.core.view.isVisible
 import androidx.lifecycle.lifecycleScope
-import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest
 import ru.surf.learn2invest.domain.utils.launchMAIN
 import ru.surf.learn2invest.presentation.R
 import ru.surf.learn2invest.presentation.databinding.ActivitySignUpBinding
+import ru.surf.learn2invest.presentation.di.DaggerPresentationComponent
 import ru.surf.learn2invest.presentation.ui.components.screens.sign_in.common.AuthActivity
 import ru.surf.learn2invest.presentation.utils.textListener
+import ru.surf.learn2invest.presentation.utils.viewModelCreator
+import ru.vafeen.core.di.coreComponent
+import javax.inject.Inject
+import javax.inject.Provider
 
 /**
  * Activity для регистрации нового пользователя. Обрабатывает ввод имени и фамилии пользователя,
  * их валидацию и обновление данных профиля. После успешной регистрации, пользователь будет
  * перенаправлен на экран входа.
  */
-@AndroidEntryPoint
-internal class SignUpActivity : AppCompatActivity() {
-    private val viewModel: SignUpActivityViewModel by viewModels()
 
+internal class SignUpActivity : AppCompatActivity() {
+    @Inject
+    lateinit var viewModelProvider: Provider<SignUpActivityViewModel>
+    private val viewModel: SignUpActivityViewModel by viewModelCreator {
+        viewModelProvider.get()
+    }
     /**
      * Метод, который вызывается при создании активности. Настроены поля ввода имени и фамилии,
      * а также обработчики событий для кнопки регистрации и действий с клавиатурой.
@@ -38,6 +44,11 @@ internal class SignUpActivity : AppCompatActivity() {
      * @param savedInstanceState Сохраненное состояние активности, если оно есть.
      */
     override fun onCreate(savedInstanceState: Bundle?) {
+        DaggerPresentationComponent
+            .builder()
+            .coreComponent(applicationContext.coreComponent)
+            .build()
+            .inject(this)
         super.onCreate(savedInstanceState)
         // Настройка цветов навигационной панели и статус-бара
         enableEdgeToEdge(

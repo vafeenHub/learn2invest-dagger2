@@ -2,8 +2,6 @@ package ru.surf.learn2invest.presentation.ui.components.screens.sign_in.changing
 
 import android.content.Context
 import androidx.lifecycle.viewModelScope
-import dagger.hilt.android.lifecycle.HiltViewModel
-import dagger.hilt.android.qualifiers.ApplicationContext
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.update
 import ru.surf.learn2invest.domain.animator.usecase.AnimateDotsUseCase
@@ -27,9 +25,8 @@ import javax.inject.Inject
  * @property animateDotsUseCase UseCase для анимации точек PIN.
  * @property updatePinUseCase UseCase для обновления PIN-кода.
  */
-@HiltViewModel
 internal class AuthChangingPinActivityViewModel @Inject constructor(
-    @ApplicationContext private val context: Context,
+    private val context: Context,
     animateDotsUseCase: AnimateDotsUseCase,
     private val updatePinUseCase: UpdatePinUseCase,
     verifyPINUseCase: VerifyPINUseCase,

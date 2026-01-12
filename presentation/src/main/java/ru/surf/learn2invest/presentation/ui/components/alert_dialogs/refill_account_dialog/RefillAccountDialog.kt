@@ -9,27 +9,44 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.core.content.ContextCompat
 import androidx.core.view.isVisible
-import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import com.google.android.material.bottomsheet.BottomSheetDialog
-import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest
 import ru.surf.learn2invest.domain.utils.launchMAIN
 import ru.surf.learn2invest.domain.utils.tapOn
 import ru.surf.learn2invest.presentation.R
 import ru.surf.learn2invest.presentation.databinding.DialogRefillAccountBinding
+import ru.surf.learn2invest.presentation.di.DaggerPresentationComponent
 import ru.surf.learn2invest.presentation.ui.components.alert_dialogs.parent.CustomBottomSheetDialog
 import ru.surf.learn2invest.presentation.utils.getWithCurrency
+import ru.surf.learn2invest.presentation.utils.viewModelCreator
+import ru.vafeen.core.di.coreComponent
+import javax.inject.Inject
+import javax.inject.Provider
 
 /**
  * Диалоговое окно для пополнения баланса.
  * Отображается в виде BottomSheetDialog и позволяет пользователю вводить сумму пополнения.
  */
-@AndroidEntryPoint
+
 internal class RefillAccountDialog : CustomBottomSheetDialog() {
 
     override val dialogTag: String = "refillAccount"
-    private val viewModel: RefillAccountDialogViewModel by viewModels()
+
+    @Inject
+    lateinit var viewModelProvider: Provider<RefillAccountDialogViewModel>
+    private val viewModel: RefillAccountDialogViewModel by viewModelCreator {
+        viewModelProvider.get()
+    }
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        DaggerPresentationComponent
+            .builder()
+            .coreComponent(requireContext().coreComponent)
+            .build()
+            .inject(this)
+        super.onCreate(savedInstanceState)
+    }
 
     /**
      * Инициализация слушателей для обработки пользовательских действий в диалоговом окне.

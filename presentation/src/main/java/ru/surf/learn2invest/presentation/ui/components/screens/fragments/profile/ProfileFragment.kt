@@ -7,25 +7,39 @@ import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
-import dagger.hilt.android.AndroidEntryPoint
 import ru.surf.learn2invest.domain.cryptography.FingerprintAuthenticator
 import ru.surf.learn2invest.domain.utils.launchMAIN
 import ru.surf.learn2invest.presentation.R
 import ru.surf.learn2invest.presentation.databinding.FragmentProfileBinding
+import ru.surf.learn2invest.presentation.di.DaggerPresentationComponent
 import ru.surf.learn2invest.presentation.ui.components.alert_dialogs.delete_profile.DeleteProfileDialog
 import ru.surf.learn2invest.presentation.ui.components.alert_dialogs.reset_stats.ResetStatsDialog
 import ru.surf.learn2invest.presentation.ui.components.screens.sign_in.common.AuthActivity
 import ru.surf.learn2invest.presentation.ui.components.screens.trading_password.common.TradingPasswordActivity
+import ru.surf.learn2invest.presentation.utils.viewModelCreator
+import ru.vafeen.core.di.coreComponent
 import javax.inject.Inject
+import javax.inject.Provider
 
 /**
  * Фрагмент профиля в [HostActivity][ru.surf.learn2invest.presentation.ui.components.screens.host.HostActivity]
  */
-@AndroidEntryPoint
+
 internal class ProfileFragment : Fragment() {
-    private val viewModel: ProfileFragmentViewModel by viewModels()
+    @Inject
+    lateinit var viewModelProvider: Provider<ProfileFragmentViewModel>
+    override fun onCreate(savedInstanceState: Bundle?) {
+        DaggerPresentationComponent
+            .builder()
+            .coreComponent(requireContext().coreComponent)
+            .build()
+            .inject(this)
+        super.onCreate(savedInstanceState)
+    }
+    private val viewModel: ProfileFragmentViewModel by viewModelCreator {
+        viewModelProvider.get()
+    }
 
     @Inject
     lateinit var fingerprintAuthenticator: FingerprintAuthenticator

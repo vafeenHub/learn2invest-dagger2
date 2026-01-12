@@ -2,8 +2,6 @@ package ru.surf.learn2invest.presentation.ui.components.screens.sign_in.sign_up
 
 import android.content.Context
 import androidx.lifecycle.viewModelScope
-import dagger.hilt.android.lifecycle.HiltViewModel
-import dagger.hilt.android.qualifiers.ApplicationContext
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.update
 import ru.surf.learn2invest.domain.animator.usecase.AnimateDotsUseCase
@@ -31,9 +29,9 @@ import javax.inject.Inject
  * @property verifyPINUseCase UseCase для проверки PIN-кода.
  * @property settingsManager Менеджер настроек приложения.
  */
-@HiltViewModel
+
 internal class AuthSignUpActivityViewModel @Inject constructor(
-    @ApplicationContext private val context: Context,
+    private val context: Context,
     private val updatePinUseCase: UpdatePinUseCase,
     animateDotsUseCase: AnimateDotsUseCase,
     private val fingerprintAuthenticator: FingerprintAuthenticator,

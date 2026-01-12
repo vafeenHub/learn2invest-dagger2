@@ -2,9 +2,6 @@ package ru.surf.learn2invest.data.database_components.di_module
 
 import dagger.Module
 import dagger.Provides
-import dagger.hilt.InstallIn
-import dagger.hilt.android.components.ActivityRetainedComponent
-import dagger.hilt.android.components.ViewModelComponent
 import ru.surf.learn2invest.data.converters.AssetBalanceHistoryConverter
 import ru.surf.learn2invest.data.converters.AssetInvestConverter
 import ru.surf.learn2invest.data.converters.TransactionConverter
@@ -21,7 +18,6 @@ import ru.surf.learn2invest.domain.database.repository.AssetInvestRepository
 import ru.surf.learn2invest.domain.database.repository.TransactionRepository
 
 @Module
-@InstallIn(ActivityRetainedComponent::class, ViewModelComponent::class)
 internal class RepositoryDiModule {
     @Provides
     internal fun provideAssetBalanceHistoryRepository(

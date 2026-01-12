@@ -11,16 +11,17 @@ import androidx.core.os.bundleOf
 import androidx.core.view.isVisible
 import androidx.lifecycle.lifecycleScope
 import com.google.android.material.bottomsheet.BottomSheetDialog
-import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest
 import ru.surf.learn2invest.domain.utils.launchMAIN
 import ru.surf.learn2invest.presentation.R
 import ru.surf.learn2invest.presentation.databinding.DialogBuyBinding
+import ru.surf.learn2invest.presentation.di.DaggerPresentationComponent
 import ru.surf.learn2invest.presentation.ui.components.alert_dialogs.parent.CustomBottomSheetDialog
 import ru.surf.learn2invest.presentation.utils.NoArgException
 import ru.surf.learn2invest.presentation.utils.getWithCurrency
 import ru.surf.learn2invest.presentation.utils.textListener
 import ru.surf.learn2invest.presentation.utils.viewModelCreator
+import ru.vafeen.core.di.coreComponent
 import javax.inject.Inject
 
 /**
@@ -30,12 +31,11 @@ import javax.inject.Inject
  * взаимодействовать с кнопками увеличения/уменьшения лотов, вводить торговый пароль,
  * а также выполнять покупку актива при наличии достаточного баланса.
  */
-@AndroidEntryPoint
 internal class BuyDialog : CustomBottomSheetDialog() {
     override val dialogTag: String = "buy"
 
     @Inject
-    lateinit var factory: BuyDialogViewModel.Factory
+    lateinit var viewModelProvider: BuyDialogViewModel.Factory
 
     /**
      * ViewModel для работы с данными о покупке актива.
@@ -45,7 +45,7 @@ internal class BuyDialog : CustomBottomSheetDialog() {
         val id = arguments?.getString(ID_KEY) ?: throw NoArgException(ID_KEY)
         val name = arguments?.getString(NAME_KEY) ?: throw NoArgException(NAME_KEY)
         val symbol = arguments?.getString(SYMBOL_KEY) ?: throw NoArgException(SYMBOL_KEY)
-        factory.createViewModel(id, name, symbol)
+        viewModelProvider.createViewModel(id, name, symbol)
     }
 
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
@@ -187,6 +187,11 @@ internal class BuyDialog : CustomBottomSheetDialog() {
     private fun maxQuantity(price: Float, balance: Float): Int = (balance / price).toInt()
 
     override fun onAttach(context: Context) {
+        DaggerPresentationComponent
+            .builder()
+            .coreComponent(requireContext().coreComponent)
+            .build()
+            .inject(this)
         super.onAttach(context)
         viewModel.handleEvent(BuyDialogIntent.SetupAssetIfInDbAndStartUpdatingPriceFLow)
     }

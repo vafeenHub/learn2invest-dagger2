@@ -2,7 +2,6 @@ package ru.surf.learn2invest.presentation.ui.components.screens.fragments.profil
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asSharedFlow
@@ -26,7 +25,7 @@ import javax.inject.Inject
  * @param clearAppDatabaseUseCase UseCase для очистки базы данных приложения.
  * @param fingerprintAuthenticator Аутентификатор для работы с биометрией пользователя.
  */
-@HiltViewModel
+
 internal class ProfileFragmentViewModel @Inject constructor(
     private val settingsManager: SettingsManager,
     private val clearAppDatabaseUseCase: ClearAppDatabaseUseCase,

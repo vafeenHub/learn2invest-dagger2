@@ -1,16 +1,13 @@
-package ru.surf.learn2invest.data.cryptography
+package ru.surf.learn2invest.data.database_components.di_module
 
 import dagger.Module
 import dagger.Provides
-import dagger.hilt.InstallIn
-import dagger.hilt.android.components.ActivityRetainedComponent
-import dagger.hilt.android.components.FragmentComponent
-import dagger.hilt.android.components.ViewModelComponent
+import ru.surf.learn2invest.data.cryptography.FingerprintAuthenticatorImpl
+import ru.surf.learn2invest.data.cryptography.PasswordHasherImpl
 import ru.surf.learn2invest.domain.cryptography.FingerprintAuthenticator
 import ru.surf.learn2invest.domain.cryptography.PasswordHasher
 
 @Module
-@InstallIn(ViewModelComponent::class, FragmentComponent::class, ActivityRetainedComponent::class)
 internal class CryptographyDIModule {
 
     @Provides

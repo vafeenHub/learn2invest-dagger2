@@ -5,8 +5,6 @@ import android.content.Intent
 import android.widget.TextView
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import dagger.hilt.android.lifecycle.HiltViewModel
-import dagger.hilt.android.qualifiers.ApplicationContext
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.asSharedFlow
@@ -27,11 +25,11 @@ import javax.inject.Inject
  * @property animateAlphaUseCase UseCase для анимации изменения прозрачности элементов
  * @property context Контекст приложения для доступа к ресурсам
  */
-@HiltViewModel
+
 internal class MainActivityViewModel @Inject constructor(
     private val settingsManager: SettingsManager,
     private val animateAlphaUseCase: AnimateAlphaUseCase,
-    @ApplicationContext private val context: Context,
+    private val context: Context,
 ) : ViewModel() {
     private val _effects = MutableSharedFlow<MainActivityEffect>()
 

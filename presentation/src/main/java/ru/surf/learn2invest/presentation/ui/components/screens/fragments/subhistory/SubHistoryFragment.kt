@@ -8,28 +8,38 @@ import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
-import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest
 import ru.surf.learn2invest.domain.utils.launchMAIN
 import ru.surf.learn2invest.presentation.databinding.FragmentAssetHistoryBinding
+import ru.surf.learn2invest.presentation.di.DaggerPresentationComponent
 import ru.surf.learn2invest.presentation.utils.NoArgException
 import ru.surf.learn2invest.presentation.utils.viewModelCreator
+import ru.vafeen.core.di.coreComponent
 import javax.inject.Inject
+import javax.inject.Provider
 
 /**
  * Фрагмент для отображения истории сделок с конкретной монетой в активе.
  */
-@AndroidEntryPoint
+
 internal class SubHistoryFragment : Fragment() {
     @Inject
-    lateinit var factory: SubHistoryFragmentViewModel.Factory
+    lateinit var viewModelProvider: Provider<SubHistoryFragmentViewModel.Factory>
+    override fun onCreate(savedInstanceState: Bundle?) {
+        DaggerPresentationComponent
+            .builder()
+            .coreComponent(requireContext().coreComponent)
+            .build()
+            .inject(this)
+        super.onCreate(savedInstanceState)
+    }
 
     @Inject
     lateinit var adapter: SubHistoryAdapter
 
     // Создание ViewModel с передачей символа монеты для фильтрации данных
     private val viewModel: SubHistoryFragmentViewModel by viewModelCreator {
-        factory.createSubHistoryAssetViewModel(
+        viewModelProvider.get().createSubHistoryAssetViewModel(
             symbol = requireArguments().getString(SYMBOL_KEY) ?: throw NoArgException(SYMBOL_KEY)
         )
     }

@@ -9,7 +9,6 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
-import dagger.hilt.android.qualifiers.ApplicationContext
 import ru.surf.learn2invest.domain.TransactionsType
 import ru.surf.learn2invest.domain.domain_models.Transaction
 import ru.surf.learn2invest.domain.services.coin_icon_loader.usecase.LoadCoinIconUseCase
@@ -25,7 +24,7 @@ import javax.inject.Inject
  */
 internal class SubHistoryAdapter @Inject constructor(
     private val loadCoinIconUseCase: LoadCoinIconUseCase, // Используется для загрузки иконки монеты
-    @ApplicationContext private val context: Context,
+     private val context: Context,
 ) : RecyclerView.Adapter<SubHistoryAdapter.ViewHolder>() {
 
     // Список данных о транзакциях
