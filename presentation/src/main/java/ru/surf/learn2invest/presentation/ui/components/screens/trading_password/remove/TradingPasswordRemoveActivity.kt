@@ -1,6 +1,5 @@
 package ru.surf.learn2invest.presentation.ui.components.screens.trading_password.remove
 
-import dagger.hilt.android.AndroidEntryPoint
 import ru.surf.learn2invest.presentation.R
 import ru.surf.learn2invest.presentation.ui.components.screens.trading_password.common.TradingPasswordActivity
 import ru.surf.learn2invest.presentation.ui.components.screens.trading_password.common.TradingPasswordActivityState
@@ -13,7 +12,7 @@ import javax.inject.Inject
  *
  * Инициализирует ViewModel с начальными данными и отображает UI для удаления пароля.
  */
-@AndroidEntryPoint
+
 internal class TradingPasswordRemoveActivity : TradingPasswordActivity() {
     @Inject
     lateinit var factory: TradingPasswordRemoveActivityViewModel.Factory

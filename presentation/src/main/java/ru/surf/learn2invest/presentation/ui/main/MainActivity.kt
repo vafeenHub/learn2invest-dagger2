@@ -5,11 +5,10 @@ import androidx.activity.enableEdgeToEdge
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
-import dagger.hilt.android.AndroidEntryPoint
 import ru.surf.learn2invest.domain.utils.launchMAIN
 import ru.surf.learn2invest.presentation.databinding.ActivityMainBinding
 
-@AndroidEntryPoint
+
 internal class MainActivity : AppCompatActivity() {
     private val viewModel: MainActivityViewModel by viewModels()
 

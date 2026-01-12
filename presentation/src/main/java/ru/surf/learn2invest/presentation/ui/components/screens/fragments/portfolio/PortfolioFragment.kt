@@ -12,7 +12,6 @@ import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
-import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest
 import ru.surf.learn2invest.domain.utils.launchMAIN
 import ru.surf.learn2invest.presentation.R
@@ -31,7 +30,7 @@ import javax.inject.Inject
 /**
  * Фрагмент портфеля в [HostActivity][ru.surf.learn2invest.presentation.ui.components.screens.host.HostActivity]
  */
-@AndroidEntryPoint
+
 internal class PortfolioFragment : BaseResFragment() {
     private val viewModel: PortfolioFragmentViewModel by viewModels()
 

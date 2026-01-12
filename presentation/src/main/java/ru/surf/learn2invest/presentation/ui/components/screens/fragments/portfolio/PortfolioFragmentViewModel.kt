@@ -3,7 +3,6 @@ package ru.surf.learn2invest.presentation.ui.components.screens.fragments.portfo
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.github.mikephil.charting.data.Entry
-import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.delay
@@ -47,7 +46,6 @@ import javax.inject.Inject
  * @param getCoinReviewUseCase UseCase для получения данных о текущей цене актива.
  * @param getBySymbolAssetInvestUseCase UseCase для получения информации о конкретном активе по его символу.
  */
-@HiltViewModel
 internal class PortfolioFragmentViewModel @Inject constructor(
     private val settingsManager: SettingsManager,
     private val getAllAssetInvestUseCase: GetAllAssetInvestUseCase,

@@ -10,7 +10,6 @@ import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
-import dagger.hilt.android.qualifiers.ActivityContext
 import ru.surf.learn2invest.domain.TransactionsType
 import ru.surf.learn2invest.domain.domain_models.Transaction
 import ru.surf.learn2invest.domain.services.coin_icon_loader.usecase.LoadCoinIconUseCase
@@ -25,7 +24,7 @@ import javax.inject.Inject
  * Используется для отображения данных транзакций, включая иконки монет и другую информацию.
  */
 internal class HistoryFragmentAdapter @Inject constructor(
-    @ActivityContext private val context: Context,
+     private val context: Context,
     private val loadCoinIconUseCase: LoadCoinIconUseCase,
 ) : RecyclerView.Adapter<HistoryFragmentAdapter.ViewHolder>() {
 

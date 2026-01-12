@@ -14,7 +14,6 @@ import com.github.mikephil.charting.formatter.ValueFormatter
 import dagger.assisted.Assisted
 import dagger.assisted.AssistedFactory
 import dagger.assisted.AssistedInject
-import dagger.hilt.android.qualifiers.ApplicationContext
 import ru.surf.learn2invest.presentation.R
 
 /**
@@ -28,7 +27,7 @@ import ru.surf.learn2invest.presentation.R
  * @param dateFormatterStrategy Стратегия форматирования дат для оси X графика.
  */
 internal class LineChartHelper @AssistedInject constructor(
-    @ApplicationContext private val context: Context,
+    private val context: Context,
     @Assisted private val dateFormatterStrategy: CustomDateValueFormatter
 ) {
     private lateinit var chart: LineChart

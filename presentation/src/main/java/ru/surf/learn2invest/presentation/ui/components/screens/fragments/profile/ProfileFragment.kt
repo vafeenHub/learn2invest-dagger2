@@ -9,7 +9,6 @@ import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
-import dagger.hilt.android.AndroidEntryPoint
 import ru.surf.learn2invest.domain.cryptography.FingerprintAuthenticator
 import ru.surf.learn2invest.domain.utils.launchMAIN
 import ru.surf.learn2invest.presentation.R
@@ -23,7 +22,7 @@ import javax.inject.Inject
 /**
  * Фрагмент профиля в [HostActivity][ru.surf.learn2invest.presentation.ui.components.screens.host.HostActivity]
  */
-@AndroidEntryPoint
+
 internal class ProfileFragment : Fragment() {
     private val viewModel: ProfileFragmentViewModel by viewModels()
 

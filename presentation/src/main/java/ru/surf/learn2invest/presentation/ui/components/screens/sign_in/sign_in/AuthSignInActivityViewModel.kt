@@ -2,8 +2,6 @@ package ru.surf.learn2invest.presentation.ui.components.screens.sign_in.sign_in
 
 import android.content.Context
 import androidx.lifecycle.viewModelScope
-import dagger.hilt.android.lifecycle.HiltViewModel
-import dagger.hilt.android.qualifiers.ApplicationContext
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.update
 import ru.surf.learn2invest.domain.animator.usecase.AnimateDotsUseCase
@@ -26,9 +24,9 @@ import javax.inject.Inject
  * @property context Контекст приложения для доступа к ресурсам
  * @property animateDotsUseCase UseCase для анимации точек PIN
  */
-@HiltViewModel
+
 internal class AuthSignInActivityViewModel @Inject constructor(
-    @ApplicationContext private val context: Context,
+    private val context: Context,
     settingsManager: SettingsManager,
     verifyPINUseCase: VerifyPINUseCase,
     animateDotsUseCase: AnimateDotsUseCase,

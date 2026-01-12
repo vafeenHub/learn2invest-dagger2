@@ -11,7 +11,6 @@ import androidx.core.os.bundleOf
 import androidx.core.view.isVisible
 import androidx.lifecycle.lifecycleScope
 import com.google.android.material.bottomsheet.BottomSheetDialog
-import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest
 import ru.surf.learn2invest.domain.utils.launchMAIN
 import ru.surf.learn2invest.presentation.R
@@ -30,7 +29,7 @@ import javax.inject.Inject
  * Пользователь может выбрать количество лотов для продажи, ввести торговый пароль (если требуется),
  * а также увидеть результат продажи, включая цену и доступное количество.
  */
-@AndroidEntryPoint
+
 internal class SellDialog : CustomBottomSheetDialog() {
 
     /**

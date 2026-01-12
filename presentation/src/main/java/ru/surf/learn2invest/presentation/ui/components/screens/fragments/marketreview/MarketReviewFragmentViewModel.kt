@@ -3,7 +3,6 @@ package ru.surf.learn2invest.presentation.ui.components.screens.fragments.market
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import androidx.paging.cachedIn
-import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableSharedFlow
@@ -37,7 +36,7 @@ import javax.inject.Inject
  * @param getPagedMarketReviewSortedByPriceDescUseCase UseCase для получения данных, отсортированных по цене (по убыванию)
  * @param getCoinReviewUseCase UseCase для получения детальной информации о криптовалюте
  */
-@HiltViewModel
+
 internal class MarketReviewFragmentViewModel @Inject constructor(
     private val getPagedMarketReviewSortedByMarketCapUseCase: GetPagedMarketReviewSortedByMarketCapUseCase,
     private val getPagedMarketReviewSortedByChangePercent24hUseCase: GetPagedMarketReviewSortedByChangePercent24hUseCase,

@@ -9,7 +9,6 @@ import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.RecyclerView
-import dagger.hilt.android.qualifiers.ActivityContext
 import ru.surf.learn2invest.domain.domain_models.CoinReview
 import ru.surf.learn2invest.domain.services.coin_icon_loader.usecase.LoadCoinIconUseCase
 import ru.surf.learn2invest.presentation.R
@@ -32,7 +31,7 @@ import javax.inject.Inject
  */
 internal class MarketReviewPagingAdapter @Inject constructor(
     private val loadCoinIconUseCase: LoadCoinIconUseCase,
-    @ActivityContext private val context: Context
+    private val context: Context
 ) : PagingDataAdapter<CoinReview, MarketReviewPagingAdapter.ViewHolder>(
     MarketReviewPagingCallback()
 ) {

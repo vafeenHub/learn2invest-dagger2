@@ -3,7 +3,6 @@ package ru.surf.learn2invest.presentation.ui.components.alert_dialogs.reset_stat
 import android.widget.Toast
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
-import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest
 import ru.surf.learn2invest.domain.utils.launchMAIN
 import ru.surf.learn2invest.presentation.R
@@ -18,7 +17,7 @@ import ru.surf.learn2invest.presentation.ui.components.alert_dialogs.parent.Cust
  *
  * @constructor Инициализирует диалог с использованием ViewModel для сброса статистики.
  */
-@AndroidEntryPoint
+
 internal class ResetStatsDialog : CustomAlertDialog() {
 
     /**

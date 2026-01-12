@@ -3,8 +3,6 @@ package ru.surf.learn2invest.presentation.ui.components.screens.sign_up
 import android.content.Context
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import dagger.hilt.android.lifecycle.HiltViewModel
-import dagger.hilt.android.qualifiers.ApplicationContext
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asSharedFlow
@@ -23,10 +21,10 @@ import javax.inject.Inject
  * @property settingsManager Менеджер профиля для обновления данных пользователя.
  * @property context Контекст приложения, используется для получения строк ресурсов.
  */
-@HiltViewModel
+
 internal class SignUpActivityViewModel @Inject constructor(
     private val settingsManager: SettingsManager,
-    @ApplicationContext private val context: Context,
+     private val context: Context,
 ) : ViewModel() {
     /** Состояние экрана регистрации, доступно для наблюдения */
     private val _state = MutableStateFlow(SignUpActivityState(firstName = "", lastName = ""))

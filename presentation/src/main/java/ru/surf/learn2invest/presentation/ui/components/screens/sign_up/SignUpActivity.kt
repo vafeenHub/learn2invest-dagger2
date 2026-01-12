@@ -14,7 +14,6 @@ import androidx.core.view.WindowCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.core.view.isVisible
 import androidx.lifecycle.lifecycleScope
-import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest
 import ru.surf.learn2invest.domain.utils.launchMAIN
 import ru.surf.learn2invest.presentation.R
@@ -27,7 +26,7 @@ import ru.surf.learn2invest.presentation.utils.textListener
  * их валидацию и обновление данных профиля. После успешной регистрации, пользователь будет
  * перенаправлен на экран входа.
  */
-@AndroidEntryPoint
+
 internal class SignUpActivity : AppCompatActivity() {
     private val viewModel: SignUpActivityViewModel by viewModels()
 

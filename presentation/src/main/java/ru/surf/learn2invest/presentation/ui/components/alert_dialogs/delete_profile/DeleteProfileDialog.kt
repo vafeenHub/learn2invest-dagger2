@@ -3,7 +3,6 @@ package ru.surf.learn2invest.presentation.ui.components.alert_dialogs.delete_pro
 import android.content.Intent
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
-import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest
 import ru.surf.learn2invest.domain.utils.launchMAIN
 import ru.surf.learn2invest.presentation.databinding.SimpleDialogBinding
@@ -14,7 +13,6 @@ import ru.surf.learn2invest.presentation.ui.main.MainActivity
  * Диалоговое окно для удаления профиля пользователя.
  * Запрашивает подтверждение перед удалением и очищает базу данных.
  */
-@AndroidEntryPoint
 internal class DeleteProfileDialog : CustomAlertDialog() {
 
     /** Тег диалога для логирования и управления. */

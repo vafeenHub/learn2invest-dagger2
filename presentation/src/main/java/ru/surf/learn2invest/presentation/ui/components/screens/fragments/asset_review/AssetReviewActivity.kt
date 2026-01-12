@@ -9,7 +9,6 @@ import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
-import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest
 import ru.surf.learn2invest.domain.utils.launchMAIN
 import ru.surf.learn2invest.presentation.R
@@ -24,7 +23,6 @@ import javax.inject.Inject
  * Экран обзора актива, позволяющий пользователю просматривать подробности актива,
  * его историю и совершать действия с активом (покупка/продажа).
  */
-@AndroidEntryPoint
 internal class AssetReviewActivity : AppCompatActivity() {
     @Inject
     lateinit var factory: AssetReviewActivityViewModel.Factory

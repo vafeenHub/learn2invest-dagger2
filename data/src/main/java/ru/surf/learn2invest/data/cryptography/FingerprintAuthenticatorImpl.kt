@@ -5,7 +5,6 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.biometric.BiometricManager
 import androidx.biometric.BiometricPrompt
 import androidx.core.content.ContextCompat
-import dagger.hilt.android.qualifiers.ApplicationContext
 import ru.surf.learn2invest.domain.cryptography.FingerprintAuthenticator
 import java.util.concurrent.Executor
 import javax.inject.Inject
@@ -14,7 +13,7 @@ import javax.inject.Inject
  * Реализация интерфейса FingerprintAuthenticator для аутентификации пользователя с помощью отпечатка пальца.
  */
 internal class FingerprintAuthenticatorImpl @Inject constructor(
-    @ApplicationContext private val context: Context,
+    private val context: Context,
 ) : FingerprintAuthenticator {
     /**
      * Проверяет, доступно ли биометрическое аппаратное обеспечение на устройстве.
@@ -22,10 +21,10 @@ internal class FingerprintAuthenticatorImpl @Inject constructor(
      * @return True, если биометрическое обеспечение доступно, false иначе.
      */
     override fun isBiometricAvailable(): Boolean = BiometricManager.from(context)
-            .canAuthenticate(
-                BiometricManager.Authenticators.BIOMETRIC_STRONG or
-                        BiometricManager.Authenticators.DEVICE_CREDENTIAL
-            ) == BiometricManager.BIOMETRIC_SUCCESS
+        .canAuthenticate(
+            BiometricManager.Authenticators.BIOMETRIC_STRONG or
+                    BiometricManager.Authenticators.DEVICE_CREDENTIAL
+        ) == BiometricManager.BIOMETRIC_SUCCESS
 
     /**
      * Устанавливает callback-функцию, вызываемую при успешной аутентификации.

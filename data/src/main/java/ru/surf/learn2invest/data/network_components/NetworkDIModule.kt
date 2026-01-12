@@ -5,9 +5,6 @@ import coil.ImageLoader
 import coil.decode.SvgDecoder
 import dagger.Module
 import dagger.Provides
-import dagger.hilt.InstallIn
-import dagger.hilt.android.components.ActivityRetainedComponent
-import dagger.hilt.android.qualifiers.ApplicationContext
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
@@ -20,14 +17,13 @@ import ru.surf.learn2invest.domain.network.NetworkRepository
 
 
 @Module
-@InstallIn(ActivityRetainedComponent::class)
 internal class NetworkDIModule {
     @Provides
     fun provideNetworkPagedRepository(impl: NetworkPagedRepositoryImpl): NetworkPagedRepository =
         impl
 
     @Provides
-    fun provideImageLoader(@ApplicationContext context: Context): ImageLoader =
+    fun provideImageLoader( context: Context): ImageLoader =
         ImageLoader.Builder(context = context).components {
             add(SvgDecoder.Factory())
         }.build()

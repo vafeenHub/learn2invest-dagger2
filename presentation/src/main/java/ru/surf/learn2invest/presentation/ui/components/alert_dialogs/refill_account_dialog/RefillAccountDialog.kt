@@ -12,7 +12,6 @@ import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import com.google.android.material.bottomsheet.BottomSheetDialog
-import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest
 import ru.surf.learn2invest.domain.utils.launchMAIN
 import ru.surf.learn2invest.domain.utils.tapOn
@@ -25,7 +24,7 @@ import ru.surf.learn2invest.presentation.utils.getWithCurrency
  * Диалоговое окно для пополнения баланса.
  * Отображается в виде BottomSheetDialog и позволяет пользователю вводить сумму пополнения.
  */
-@AndroidEntryPoint
+
 internal class RefillAccountDialog : CustomBottomSheetDialog() {
 
     override val dialogTag: String = "refillAccount"

@@ -1,6 +1,5 @@
 package ru.surf.learn2invest.presentation.ui.components.screens.trading_password.change
 
-import dagger.hilt.android.AndroidEntryPoint
 import ru.surf.learn2invest.presentation.R
 import ru.surf.learn2invest.presentation.ui.components.screens.trading_password.common.TradingPasswordActivity
 import ru.surf.learn2invest.presentation.ui.components.screens.trading_password.common.TradingPasswordActivityState
@@ -14,7 +13,7 @@ import javax.inject.Inject
  *
  * Инициализирует ViewModel с начальными значениями и отображает UI для смены пароля.
  */
-@AndroidEntryPoint
+
 internal class TradingPasswordChangeActivity : TradingPasswordActivity() {
     @Inject
     lateinit var factory: TradingPasswordChangeActivityViewModel.Factory

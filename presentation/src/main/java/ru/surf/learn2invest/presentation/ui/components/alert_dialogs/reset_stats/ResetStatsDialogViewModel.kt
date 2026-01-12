@@ -3,8 +3,6 @@ package ru.surf.learn2invest.presentation.ui.components.alert_dialogs.reset_stat
 import android.content.Context
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import dagger.hilt.android.lifecycle.HiltViewModel
-import dagger.hilt.android.qualifiers.ApplicationContext
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asSharedFlow
@@ -25,11 +23,11 @@ import javax.inject.Inject
  * @param clearAppDatabaseUseCase UseCase для очистки базы данных приложения.
  * @param context Контекст приложения для доступа к ресурсам.
  */
-@HiltViewModel
+
 internal class ResetStatsDialogViewModel @Inject constructor(
     private val settingsManager: SettingsManager,
     private val clearAppDatabaseUseCase: ClearAppDatabaseUseCase,
-    @ApplicationContext private val context: Context
+     private val context: Context
 ) : ViewModel() {
     /**
      * Поток эффектов для обработки событий UI (закрытие диалога, toast-уведомления и т.п.).

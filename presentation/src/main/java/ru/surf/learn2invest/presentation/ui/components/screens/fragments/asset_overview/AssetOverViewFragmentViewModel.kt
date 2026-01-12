@@ -7,7 +7,6 @@ import com.github.mikephil.charting.data.Entry
 import dagger.assisted.Assisted
 import dagger.assisted.AssistedFactory
 import dagger.assisted.AssistedInject
-import dagger.hilt.android.qualifiers.ApplicationContext
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableSharedFlow
@@ -47,7 +46,7 @@ internal class AssetOverViewFragmentViewModel @AssistedInject constructor(
     @Assisted("id") private val id: String,
     @Assisted("name") private val name: String,
     @Assisted("symbol") private val symbol: String,
-    @ApplicationContext private val context: Context
+    private val context: Context
 ) : ViewModel() {
     private var data = listOf<Entry>()
     private var chartHelper: LineChartHelper? = null

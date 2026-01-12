@@ -1,50 +1,51 @@
 [versions]
 accompanistPermissions = "0.37.3" # Accompanist Permissions
-agp = "8.10.0" # Android Gradle Plugin
+agp = "8.13.2" # Android Gradle Plugin
 biometric = "1.1.0" # AndroidX Biometric
-hiltAndroid = "2.56.2" # Hilt Android
-kotlin = "2.1.21" # Kotlin
-coreKtx = "1.16.0" # AndroidX Core KTX
-appcompat = "1.7.0" # AndroidX AppCompat
-kotlinxSerializationJson = "1.8.1"
-ktorServerCore = "3.1.3"
-ktorServerNetty = "3.1.3"
-ktorSerializationKotlinxJson = "3.1.3"
-logbackClassic = "1.5.18"
-material = "1.12.0" # Material Design
-activity = "1.10.1" # AndroidX Activity
-constraintlayout = "2.2.1" # ConstraintLayout
-espressoIntent = "3.6.1" # Espresso Intents
+dagger = "2.57.2"
+hiltAndroid = "2.57.2" # Hilt Android
+kotlin = "2.3.0" # Kotlin
+coreKtx = "1.17.0" # AndroidX Core KTX
+appcompat = "1.7.1" # AndroidX AppCompat
+kotlinxSerializationJson = "1.9.0"
+ktorServerCore = "3.3.3"
+ktorServerNetty = "3.3.3"
+ktorSerializationKotlinxJson = "3.3.3"
+logbackClassic = "1.5.24"
+material = "1.13.0"
+activity = "1.12.2"
+constraintlayout = "2.2.1"
+espressoIntent = "3.6.1"
 
-# Room
 mpandroidchart = "v3.1.0" # MPAndroidChart
 pagingRuntimeKtx = "3.3.6"
-roomCommon = "2.7.1" # Room Common
-roomKtx = "2.7.1" # Room KTX
+roomCommon = "2.8.4" # Room Common
+roomKtx = "2.8.4" # Room KTX
 retrofit = "3.0.0" # Retrofit
 converterGson = "3.0.0" # Retrofit Gson Converter
-gson = "2.13.1" # Gson
-loggingInterceptor = "5.0.0-alpha.14" # OkHttp Logging Interceptor
-navigationFragment = "2.9.0" # Navigation Fragment
-navigationUiKtx = "2.9.0" # Navigation UI KTX
-navigationFragmentKtx = "2.9.0" # Navigation Fragment KTX
-lifecycleProcess = "2.9.0" # Lifecycle Process
+gson = "2.13.2" # Gson
+loggingInterceptor = "5.3.2" # OkHttp Logging Interceptor
+navigationFragment = "2.9.6" # Navigation Fragment
+navigationUiKtx = "2.9.6" # Navigation UI KTX
+navigationFragmentKtx = "2.9.6" # Navigation Fragment KTX
+lifecycleProcess = "2.10.0" # Lifecycle Process
 coilSvg = "2.7.0" # Coil SVG
 coil = "2.7.0" # Coil
 junit = "4.13.2" # JUnit
-junitVersion = "1.2.1" # AndroidX JUnit
-espressoCore = "3.6.1"
-jetbrainsKotlinJvm = "2.1.21" # Espresso Core
-
+junitVersion = "1.3.0" # AndroidX JUnit
+espressoCore = "3.7.0"
+ksp = "2.3.2"
 [libraries]
 accompanist-permissions = { module = "com.google.accompanist:accompanist-permissions", version.ref = "accompanistPermissions" } # Accompanist Permissions
 androidx-biometric = { module = "androidx.biometric:biometric", version.ref = "biometric" } # AndroidX Biometric
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" } # AndroidX Core KTX
 androidx-paging-runtime-ktx = { module = "androidx.paging:paging-runtime-ktx", version.ref = "pagingRuntimeKtx" }
+dagger-compiler = { module = "com.google.dagger:dagger-compiler", version.ref = "dagger" }
+dagger = { module = "com.google.dagger:dagger", version.ref = "dagger" }
 hilt-android = { module = "com.google.dagger:hilt-android", version.ref = "hiltAndroid" } # Hilt Android
 hilt-android-compiler = { module = "com.google.dagger:hilt-android-compiler", version.ref = "hiltAndroid" } # Hilt Android Compiler
 androidx-appcompat = { group = "androidx.appcompat", name = "appcompat", version.ref = "appcompat" } # AndroidX AppCompat
-kotlinx-serialization-json = { module = "org.jetbrains.kotlinx:kotlinx-serialization-json", version.ref = "kotlinxSerializationJson" }
+kotlinx-serialization-json = { group = "org.jetbrains.kotlinx", name = "kotlinx-serialization-json", version.ref = "kotlinxSerializationJson" }
 ktor-server-compression = { module = "io.ktor:ktor-server-compression", version.ref = "ktorServerCore" }
 ktor-server-content-negotiation = { module = "io.ktor:ktor-server-content-negotiation", version.ref = "ktorServerCore" }
 ktor-serialization-kotlinx-json = { module = "io.ktor:ktor-serialization-kotlinx-json", version.ref = "ktorSerializationKotlinxJson" }
@@ -80,8 +81,7 @@ androidx-espresso-intent = { group = "androidx.test.espresso.intent", name = "es
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }
 kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
-# kapt for Room
-org-jetbrains-kotlin-kapt = { id = "org.jetbrains.kotlin.kapt", version.ref = "kotlin" } # Kotlin KAPT Plugin
+ksp = { id = "com.google.devtools.ksp", version.ref = "ksp" }
 hilt-android = { id = "com.google.dagger.hilt.android", version.ref = "hiltAndroid" } # Hilt Android Plugin
 android-library = { id = "com.android.library", version.ref = "agp" }  # Android Library Plugin
-jetbrains-kotlin-jvm = { id = "org.jetbrains.kotlin.jvm", version.ref = "jetbrainsKotlinJvm" } # Kotlin JVM plugin
+jetbrains-kotlin-jvm = { id = "org.jetbrains.kotlin.jvm", version.ref = "kotlin" } # Kotlin JVM plugin

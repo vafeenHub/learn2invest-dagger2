@@ -14,7 +14,6 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.paging.LoadState
 import androidx.recyclerview.widget.LinearLayoutManager
-import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest
 import ru.surf.learn2invest.domain.utils.launchMAIN
 import ru.surf.learn2invest.presentation.R
@@ -33,7 +32,6 @@ import javax.inject.Inject
  * - Обработка ошибок сети
  * - Поддержка темной/светлой темы
  */
-@AndroidEntryPoint
 internal class MarketReviewFragment : BaseResFragment() {
 
     /**

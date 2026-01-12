@@ -7,7 +7,6 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.core.view.isVisible
 import androidx.lifecycle.lifecycleScope
-import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest
 import ru.surf.learn2invest.domain.utils.launchMAIN
 import ru.surf.learn2invest.presentation.R
@@ -27,7 +26,6 @@ import javax.inject.Inject
  * Фрагмент, отображающий обзор актива, включая график и финансовую информацию.
  * Использует [AssetOverViewFragmentViewModel] для получения данных и отображения их на экране.
  */
-@AndroidEntryPoint
 internal class AssetOverviewFragment : BaseResFragment() {
     @Inject
     lateinit var factory: AssetOverViewFragmentViewModel.Factory

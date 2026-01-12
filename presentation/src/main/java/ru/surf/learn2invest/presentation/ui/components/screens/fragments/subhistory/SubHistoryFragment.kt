@@ -8,7 +8,6 @@ import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
-import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest
 import ru.surf.learn2invest.domain.utils.launchMAIN
 import ru.surf.learn2invest.presentation.databinding.FragmentAssetHistoryBinding
@@ -19,7 +18,7 @@ import javax.inject.Inject
 /**
  * Фрагмент для отображения истории сделок с конкретной монетой в активе.
  */
-@AndroidEntryPoint
+
 internal class SubHistoryFragment : Fragment() {
     @Inject
     lateinit var factory: SubHistoryFragmentViewModel.Factory

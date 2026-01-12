@@ -1,9 +1,8 @@
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
-    alias(libs.plugins.org.jetbrains.kotlin.kapt)
+    alias(libs.plugins.ksp)
     id("kotlin-parcelize")
-    alias(libs.plugins.hilt.android)
 }
 
 android {
@@ -31,12 +30,10 @@ android {
         }
     }
     compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_11
-        targetCompatibility = JavaVersion.VERSION_11
+        sourceCompatibility = JavaVersion.VERSION_17
+        targetCompatibility = JavaVersion.VERSION_17
     }
-    kotlinOptions {
-        jvmTarget = "11"
-    }
+
 }
 
 dependencies {
@@ -50,7 +47,7 @@ dependencies {
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
-    // DI
-    implementation(libs.hilt.android)
-    kapt(libs.hilt.android.compiler)
+// dagger2
+    implementation(libs.dagger)
+    ksp(libs.dagger.compiler)
 }

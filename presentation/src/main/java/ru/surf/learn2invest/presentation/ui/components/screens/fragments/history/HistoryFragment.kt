@@ -8,7 +8,6 @@ import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
-import dagger.hilt.android.AndroidEntryPoint
 import ru.surf.learn2invest.domain.utils.launchMAIN
 import ru.surf.learn2invest.presentation.databinding.FragmentHistoryBinding
 import ru.surf.learn2invest.presentation.ui.components.screens.fragments.common.BaseResFragment
@@ -18,7 +17,6 @@ import javax.inject.Inject
  * Фрагмент, отображающий историю сделок. Является частью экрана [ru.surf.learn2invest.presentation.ui.components.screens.host.HostActivity].
  * В данном фрагменте отображается список транзакций пользователя.
  */
-@AndroidEntryPoint
 internal class HistoryFragment : BaseResFragment() {
     private val viewModel: HistoryFragmentViewModel by viewModels()
 

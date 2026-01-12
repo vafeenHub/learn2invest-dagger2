@@ -7,11 +7,11 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.content.ContentProviderCompat.requireContext
 import androidx.core.os.bundleOf
 import androidx.core.view.isVisible
 import androidx.lifecycle.lifecycleScope
 import com.google.android.material.bottomsheet.BottomSheetDialog
-import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest
 import ru.surf.learn2invest.domain.utils.launchMAIN
 import ru.surf.learn2invest.presentation.R
@@ -30,7 +30,6 @@ import javax.inject.Inject
  * взаимодействовать с кнопками увеличения/уменьшения лотов, вводить торговый пароль,
  * а также выполнять покупку актива при наличии достаточного баланса.
  */
-@AndroidEntryPoint
 internal class BuyDialog : CustomBottomSheetDialog() {
     override val dialogTag: String = "buy"
 
